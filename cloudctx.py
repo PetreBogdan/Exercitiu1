@@ -14,8 +14,8 @@ class ClassCtx:
         self.health = HealthInst(current_health, max_sev)
 
     def display_info(self):
-        print("Name: ", self.name)
-        print("Tenant Name: ", self.tenant_name)
-        print("Description: ", self.description)
-        print("Name Alias: ", self.name_alias)
-        print("Ctx Profile Name: ", self.ctx_profile_name)
+        print(f"Name: {self.name} \n"
+              f"Tenant Name: {self.tenant_name}\n"
+              f"Description: {self.description}\n"
+              f"Name Alias: {self.name_alias}\n"
+              f"Ctx Profile Name: {self.ctx_profile_name}")
