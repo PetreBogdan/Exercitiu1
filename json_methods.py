@@ -1,6 +1,13 @@
 from cloudctx import ClassCtx
 
 
+data_dict = {'name': 'name', 'tenantName': 'tenant_name',
+             'description': 'description', 'nameAlias': 'name_alias',
+             'ctxProfileName': 'ctx_profile_name'}
+
+health_dict = {'cur': 'cur', 'maxSev': 'maxSev'}
+
+
 def check_for_empty(string):
     """
     Checks if the var is empty
@@ -25,27 +32,21 @@ def read_from_json(json_dict):
     nr_ctx = len(json_dict['imdata'])
     for element in range(nr_ctx):
         atributes = json_dict['imdata'][element]['hcloudCtx']['attributes']
-        for i in atributes.keys():
-            if i == 'name':
-                name = check_for_empty(atributes[i])
-            elif i == 'tenantName':
-                tenant_name = check_for_empty(atributes[i])
-            elif i == 'description':
-                description = check_for_empty(atributes[i])
-            elif i == 'nameAlias':
-                name_alias = check_for_empty(atributes[i])
-            elif i == 'ctxProfileName':
-                ctx_profile_name = check_for_empty(atributes[i])
+        for key in data_dict.keys():
+            if key not in atributes.keys():
+                raise Exception(f'Missing attribute: {key}')
+            else:
+                data_dict[key] = check_for_empty(atributes[key])
 
         atributes_health = json_dict['imdata'][element]['hcloudCtx']['children'][0]['healthInst']['attributes']
-        for i in atributes_health.keys():
-            if i == 'cur':
-                current_health = int(atributes_health[i])
-            elif i == 'maxSev':
-                max_sev = atributes_health[i]
+        for key in health_dict.keys():
+            if key not in atributes_health.keys():
+                raise Exception(f"Missing attribute: {key}")
+            else:
+                health_dict[key] = check_for_empty(atributes_health[key])
 
-        mo = ClassCtx(name, tenant_name, description,
-                      name_alias, ctx_profile_name,
-                      current_health, max_sev)
+        mo = ClassCtx(data_dict['name'], data_dict['tenantName'], data_dict['description'],
+                      data_dict['nameAlias'], data_dict['ctxProfileName'],
+                      int(health_dict['cur']), health_dict['maxSev'])
         lista_instante.append(mo)
     return lista_instante
