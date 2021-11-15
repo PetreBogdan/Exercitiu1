@@ -96,13 +96,26 @@ def format_date(string):
     return dateobj
 
 
-def show_instances_by_lastMod(instante):
+def show_instances_by_lastmod(instante):
     """
     Shows information about hcloud instances ordered by last modified
     :param instante: list containing all instances
     :return: displays the information about each instance ordered by date and time modified
     """
     instante = sorted(instante, key=lambda x: datetime.strptime(x.mod_ts, '%d-%m-%Y %I:%M:%S %p'), reverse=True)
+    for index, i in enumerate(instante):
+        print(f"hcloudCtx number {index + 1}")
+        i.display_info()
+        i.health.display_health()
+        print()
+
+
+def show_instances(instante):
+    """
+    Shows information about hcloud instances unordered
+    :param instante: list containing all instances
+    :return: displays the information about each instance unordered
+    """
     for index, i in enumerate(instante):
         print(f"hcloudCtx number {index + 1}")
         i.display_info()
