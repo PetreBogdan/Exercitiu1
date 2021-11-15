@@ -1,4 +1,4 @@
-from json_methods import read_from_json
+from json_methods import *
 import json
 
 
@@ -8,9 +8,7 @@ if __name__ == '__main__':
         json_dict = json.load(json_file)
 
     instante = read_from_json(json_dict)
+    # show_instances_by_health(instante)
+    # print(display_nr_instances(json_dict))
+    # show_instances_by_lastMod(instante)
 
-    for index, i in enumerate(instante):
-        print(f"hcloudCtx number {index+1}")
-        i.display_info()
-        i.health.display_health()
-        print()
