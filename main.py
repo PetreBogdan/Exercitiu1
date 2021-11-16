@@ -20,8 +20,10 @@ if __name__ == '__main__':
 
     instante = read_from_json(json_dict)
     if args.health:
-        show_instances_by_health(instante)
+        displays_instances_by_health(instante)
     elif args.date:
-        show_instances_by_lastMod(instante)
+        displays_instances_by_lastmod(instante)
+        print(ClassCtx.returns_nr_instances())
     else:
-        show_instances(instante)
+        displays_instances(instante)
+        print(ClassCtx.returns_nr_instances())
