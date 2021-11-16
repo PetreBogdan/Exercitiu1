@@ -30,9 +30,7 @@ def read_from_json(json_dict):
             for key in health_dict.keys():
                 health_dict[key] = ClassCtx.check_for_empty(atributes_health[key])
 
-        mo = ClassCtx(data_dict['name'], data_dict['tenantName'], data_dict['description'],
-                      data_dict['nameAlias'], data_dict['ctxProfileName'], data_dict['modTs'],
-                      int(health_dict['cur']), health_dict['maxSev'])
+        mo = ClassCtx(data_dict,health_dict)
 
         lista_instante.append(mo)
     return lista_instante

@@ -1,8 +1,8 @@
 class HealthInst:
 
-    def __init__(self, current_health, max_sev):
-        self.current_health = current_health
-        self.max_sev = max_sev
+    def __init__(self, health_dict):
+        self.current_health = int(health_dict['cur'])
+        self.max_sev = health_dict['maxSev']
 
     def display_health(self):
         if self.current_health < 100:
