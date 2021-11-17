@@ -20,7 +20,7 @@ def read_from_json(json_dict):
     for element in range(nr_ctx):
         atributes = json_dict['imdata'][element]['hcloudCtx']['attributes']
         for key in data_dict.keys():
-            data_dict[key] = ClassCtx.check_for_empty(atributes[key])
+            data_dict[key] = atributes[key]
         try:
             atributes_health = json_dict['imdata'][element]['hcloudCtx']['children'][0]['healthInst']['attributes']
         except IndexError:
@@ -28,9 +28,9 @@ def read_from_json(json_dict):
             health_dict['maxSev'] = "Missing healthInst"
         else:
             for key in health_dict.keys():
-                health_dict[key] = ClassCtx.check_for_empty(atributes_health[key])
+                health_dict[key] = atributes_health[key]
 
-        mo = ClassCtx(data_dict,health_dict)
+        mo = ClassCtx(data_dict, health_dict)
 
         lista_instante.append(mo)
     return lista_instante
@@ -68,3 +68,4 @@ def displays_instances(instante):
         i.display_info()
         i.health.display_health()
         print()
+    print(ClassCtx.returns_nr_instances())
