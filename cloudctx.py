@@ -45,10 +45,7 @@ class ClassCtx:
 
     @name.setter
     def name(self, string):
-        if string == "":
-            self._name = "-"
-        else:
-            self._name = string
+        self._name = ClassCtx.check_for_empty(string)
 
     @property
     def description(self):
@@ -56,10 +53,7 @@ class ClassCtx:
 
     @description.setter
     def description(self, string):
-        if string == "":
-            self._description = "-"
-        else:
-            self._description = string
+        self._description = ClassCtx.check_for_empty(string)
 
     @property
     def tenant_name(self):
@@ -67,10 +61,7 @@ class ClassCtx:
 
     @tenant_name.setter
     def tenant_name(self, string):
-        if string == "":
-            self._tenant_name = "-"
-        else:
-            self._tenant_name = string
+        self._tenant_name = ClassCtx.check_for_empty(string)
 
     @property
     def name_alias(self):
@@ -78,10 +69,7 @@ class ClassCtx:
 
     @name_alias.setter
     def name_alias(self, string):
-        if string == "":
-            self._name_alias = "-"
-        else:
-            self._name_alias = string
+        self._name_alias = ClassCtx.check_for_empty(string)
 
     @property
     def ctx_profile_name(self):
@@ -89,11 +77,15 @@ class ClassCtx:
 
     @ctx_profile_name.setter
     def ctx_profile_name(self, string):
+        self._ctx_profile_name = ClassCtx.check_for_empty(string)
+
+    @staticmethod
+    def check_for_empty(string):
         if string == "":
-            self._ctx_profile_name = "-"
+            return "-"
         else:
-            self._ctx_profile_name = string
+            return string
 
     @classmethod
     def returns_nr_instances(cls):
-        return f"Number of cloudCtx instances created are: {ClassCtx.cloud_obj}"
+        return f"Number of cloudCtx instances created are: {cls.cloud_obj}"
